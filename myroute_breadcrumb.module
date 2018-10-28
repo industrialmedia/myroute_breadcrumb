@@ -1,0 +1,45 @@
+<?php
+
+use Drupal\Core\Url;
+
+
+function myroute_breadcrumb_preprocess_breadcrumb(&$variables) {
+  if (!empty($variables['breadcrumb'])) {
+    $request = \Drupal::request();
+    // Крошка на главную страницу
+    if ($variables['breadcrumb'][0]['url'] != '/') {
+
+      $config = \Drupal::config('myroute_breadcrumb.settings');
+      $breadcrumb_front_name = $config->get('breadcrumb_front_name');
+      if (empty($breadcrumb_front_name)) {
+        $breadcrumb_front_name = t('Home');
+      }
+
+      $variables['breadcrumb'][-1] = ['text' => $breadcrumb_front_name, 'url' => '/'];
+      ksort($variables['breadcrumb']);
+    }
+    else {
+      $variables['breadcrumb'][0] = ['text' => t('Home'), 'url' => '/'];
+    }
+    // Удаляем ссылку если это сылка на текущую страницу
+    if ($route = $request->attributes->get(\Symfony\Cmf\Component\Routing\RouteObjectInterface::ROUTE_OBJECT)) {
+      $curent_url = Url::createFromRequest($request)->toString();
+      foreach ($variables['breadcrumb'] as &$breadcrumb) {
+        if ($breadcrumb['url'] == $curent_url) {
+          unset($breadcrumb['url']);
+        }
+      }
+    }
+    // Если кол-во ссылок = 1, только на главную, то добавляем на текущую страницу
+    if (count($variables['breadcrumb']) == 1) {
+      /* @var $route \Symfony\Component\Routing\Route */
+      if ($route = $request->attributes->get(\Symfony\Cmf\Component\Routing\RouteObjectInterface::ROUTE_OBJECT)) {
+        $title = \Drupal::service('title_resolver')->getTitle($request, $route);
+        $variables['breadcrumb'][] = ['text' => $title];
+        $variables['#cache']['contexts'][0] = 'route';
+      }
+    }
+  }
+}
+
+

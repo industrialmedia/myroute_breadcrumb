@@ -1,0 +1,96 @@
+# Entity
+entity.myroute_breadcrumb.collection:
+  path: '/admin/seo/myroute_breadcrumb/list'
+  defaults:
+    _entity_list: 'myroute_breadcrumb'
+    _title: 'MyrouteBreadcrumb'
+  requirements:
+    _permission: 'administer site configuration'
+
+entity.myroute_breadcrumb.add_form:
+  path: '/admin/seo/myroute_breadcrumb/list/add'
+  defaults:
+    _entity_form: 'myroute_breadcrumb.add'
+    _title: 'Add MyrouteBreadcrumb'
+  requirements:
+    _permission: 'administer site configuration'
+
+entity.myroute_breadcrumb.edit_form:
+  path: '/admin/seo/myroute_breadcrumb/list/{myroute_breadcrumb}'
+  defaults:
+    _entity_form: 'myroute_breadcrumb.edit'
+    _title: 'Edit MyrouteBreadcrumb'
+  requirements:
+    _permission: 'administer site configuration'
+
+entity.myroute_breadcrumb.delete_form:
+  path: '/admin/seo/myroute_breadcrumb/list/{myroute_breadcrumb}/delete'
+  defaults:
+    _entity_form: 'myroute_breadcrumb.delete'
+    _title: 'Delete MyrouteBreadcrumb'
+  requirements:
+    _permission: 'administer site configuration'
+    
+
+
+# Autocomplete
+myroute_breadcrumb.router_autocomplete:
+  path: '/admin/seo/myroute_breadcrumb/router-autocomplete'
+  defaults:
+    _title: 'Router autocomplete'
+    _controller: '\Drupal\myroute_breadcrumb\Controller\MyrouteBreadcrumbAutocomplete::getRouterAutocomplete'
+  requirements:
+    _permission: 'access content'
+
+
+
+# Conditions
+myroute_breadcrumb.condition_select:
+  path: '/admin/seo/myroute_breadcrumb/list/{myroute_breadcrumb}/condition/select'
+  defaults:
+    _controller: '\Drupal\myroute_breadcrumb\Controller\MyrouteBreadcrumbConditionController::selectCondition'
+    _title: 'Select condition'
+  requirements:
+    _permission: 'administer site configuration'
+
+myroute_breadcrumb.condition_add:
+  path: '/admin/seo/myroute_breadcrumb/list/{myroute_breadcrumb}/condition/add/{condition_id}'
+  defaults:
+    _form: '\Drupal\myroute_breadcrumb\Form\ConditionAddForm'
+    _title: 'Add new condition'
+  requirements:
+    _permission: 'administer site configuration'
+
+myroute_breadcrumb.condition_edit:
+  path: '/admin/seo/myroute_breadcrumb/list/{myroute_breadcrumb}/condition/edit/{condition_id}'
+  defaults:
+    _form: '\Drupal\myroute_breadcrumb\Form\ConditionEditForm'
+    _title: 'Edit Condition'
+  requirements:
+    _permission: 'administer site configuration'
+
+myroute_breadcrumb.condition_delete:
+  path: '/admin/seo/myroute_breadcrumb/list/{myroute_breadcrumb}/condition/delete/{condition_id}'
+  defaults:
+    _form: '\Drupal\myroute_breadcrumb\Form\ConditionDeleteForm'
+    _title: 'Delete condition'
+  requirements:
+    _permission: 'administer site configuration'
+    
+    
+
+
+myroute_breadcrumb.admin.settings:
+  path: '/admin/seo/myroute_breadcrumb/settings'
+  defaults:
+    _title: 'Настройки'
+    _form: 'Drupal\myroute_breadcrumb\Form\MyrouteBreadcrumbSettingsForm'
+  requirements:
+    _permission: 'administer site configuration'
+
+
+
+
+
+
+

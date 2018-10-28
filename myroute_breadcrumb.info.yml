@@ -1,0 +1,12 @@
+name: myroute_breadcrumb
+description: Myroute breadcrumb settings
+package: AAMID
+type: module
+core: 8.x
+version: 1.0
+
+
+configure: entity.myroute_breadcrumb.collection
+
+dependencies:
+  - token

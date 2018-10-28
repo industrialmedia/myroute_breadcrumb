@@ -1,0 +1,12 @@
+
+
+entity.myroute_breadcrumb.collection:
+  route_name: entity.myroute_breadcrumb.collection
+  base_route: entity.myroute_breadcrumb.collection
+  title: Шаблоны
+
+myroute_breadcrumb.admin.settings:
+  route_name: myroute_breadcrumb.admin.settings
+  base_route: entity.myroute_breadcrumb.collection
+  title: Настройки
+  weight: 10

@@ -1,0 +1,16 @@
+services:
+  myroute_breadcrumb.myroute_breadcrumb_evaluator:
+    class: Drupal\myroute_breadcrumb\MyrouteBreadcrumbEvaluator
+    arguments: ['@context.handler', '@context.repository', '@entity_type.manager']
+
+  myroute_breadcrumb.helper:
+    class: Drupal\myroute_breadcrumb\MyrouteBreadcrumbHelper
+    arguments: ['@router.route_provider', '@token.entity_mapper']
+
+  myroute_breadcrumb.breadcrumb:
+    class: Drupal\myroute_breadcrumb\Breadcrumb\MyrouteBreadcrumbBuilder
+    arguments: ['@token', '@entity_type.manager', '@myroute_breadcrumb.myroute_breadcrumb_evaluator', '@path.validator', '@myroute_breadcrumb.helper']
+    tags:
+    - { name: breadcrumb_builder, priority: 10000 }
+
+

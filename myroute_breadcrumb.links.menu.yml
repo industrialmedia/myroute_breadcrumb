@@ -1,0 +1,11 @@
+entity.myroute_breadcrumb.collection:
+  title: 'Хлебные крошки'
+  description: 'Список хлебных крошек по шаблону'
+  route_name: entity.myroute_breadcrumb.collection
+  parent: myapi.seo
+  weight: 10
+
+
+
+
+
