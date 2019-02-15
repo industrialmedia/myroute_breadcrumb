@@ -268,6 +268,7 @@ class MyrouteBreadcrumbForm extends EntityForm implements ContainerInjectionInte
    */
   public function save(array $form, FormStateInterface $form_state) {
     $myroute_breadcrumb = $this->entity;
+    $is_new = $myroute_breadcrumb->isNew();
     $status = $myroute_breadcrumb->save();
     if ($status) {
       $this->messenger->addStatus($this->t('Saved the %label MyrouteBreadcrumb.', array(
@@ -279,7 +280,12 @@ class MyrouteBreadcrumbForm extends EntityForm implements ContainerInjectionInte
         '%label' => $myroute_breadcrumb->label(),
       )));
     }
-    $form_state->setRedirectUrl($myroute_breadcrumb->toUrl('collection'));
+    if ($is_new) {
+      $form_state->setRedirectUrl($myroute_breadcrumb->toUrl('edit-form'));
+    }
+    else {
+      $form_state->setRedirectUrl($myroute_breadcrumb->toUrl('collection'));
+    }
   }
 
 
