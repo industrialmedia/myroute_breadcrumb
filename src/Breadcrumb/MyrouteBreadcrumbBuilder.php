@@ -12,6 +12,8 @@ use Drupal\myroute_breadcrumb\MyrouteBreadcrumbHelper;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\myroute_breadcrumb\MyrouteBreadcrumbEvaluator;
 use Drupal\Core\Path\PathValidatorInterface;
+use Drupal\Core\Config\ConfigFactoryInterface;
+
 
 
 /**
@@ -58,6 +60,13 @@ class MyrouteBreadcrumbBuilder implements BreadcrumbBuilderInterface {
 
 
   /**
+   * The config factory.
+   *
+   * @var \Drupal\Core\Config\ConfigFactoryInterface
+   */
+  protected $configFactory;
+
+  /**
    * Constructs a new MyrouteBreadcrumbBuilder.
    *
    * @param \Drupal\Core\Utility\Token $token
@@ -70,13 +79,16 @@ class MyrouteBreadcrumbBuilder implements BreadcrumbBuilderInterface {
    *   The path validator service.
    * @param \Drupal\myroute_breadcrumb\MyrouteBreadcrumbHelper $myroute_breadcrumb_helper
    *   The myroute breadcrumb helper service.
+   * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
+   *   The config factory.
    */
-  public function __construct(Token $token, EntityTypeManagerInterface $entity_type_manager, MyrouteBreadcrumbEvaluator $myroute_breadcrumb_evaluator, PathValidatorInterface $path_validator, MyrouteBreadcrumbHelper $myroute_breadcrumb_helper) {
+  public function __construct(Token $token, EntityTypeManagerInterface $entity_type_manager, MyrouteBreadcrumbEvaluator $myroute_breadcrumb_evaluator, PathValidatorInterface $path_validator, MyrouteBreadcrumbHelper $myroute_breadcrumb_helper, ConfigFactoryInterface $config_factory) {
     $this->token = $token;
     $this->entityTypeManager = $entity_type_manager;
     $this->myrouteBreadcrumbEvaluator = $myroute_breadcrumb_evaluator;
     $this->pathValidator = $path_validator;
     $this->myrouteBreadcrumbHelper = $myroute_breadcrumb_helper;
+    $this->configFactory = $config_factory;
   }
 
   /**
@@ -101,6 +113,7 @@ class MyrouteBreadcrumbBuilder implements BreadcrumbBuilderInterface {
       /** @var \Drupal\myroute_breadcrumb\Entity\MyrouteBreadcrumb $myroute_breadcrumb */
       $myroute_breadcrumb = $this->entityTypeManager->getStorage('myroute_breadcrumb')
         ->load($myroute_breadcrumb_id);
+      $breadcrumb->addCacheTags($myroute_breadcrumb->getCacheTags());
       $items = $myroute_breadcrumb->getItems();
       $token_types = $this->myrouteBreadcrumbHelper->getTokenTypesByRouteName($route_name);
       $data = [];
@@ -131,10 +144,19 @@ class MyrouteBreadcrumbBuilder implements BreadcrumbBuilderInterface {
       }
     }
     if (!$breadcrumb->getLinks()) {
-      $link = Link::createFromRoute(t('Home'), '<front>');
+      $config = $this->configFactory ->get('myroute_breadcrumb.settings');
+      $breadcrumb_front_name = $config->get('breadcrumb_front_name');
+      if (empty($breadcrumb_front_name)) {
+        $breadcrumb_front_name = t('Home');
+      }
+      $link = Link::createFromRoute($breadcrumb_front_name, '<front>');
       $breadcrumb->addLink($link);
     }
     $breadcrumb->addCacheContexts(['route']);
+
+
+
+
     return $breadcrumb;
   }
 

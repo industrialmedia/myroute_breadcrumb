@@ -9,12 +9,12 @@ function myroute_breadcrumb_preprocess_breadcrumb(&$variables) {
     $request = \Drupal::request();
 
     // Крошка на главную страницу
+    $config = \Drupal::config('myroute_breadcrumb.settings');
+    $breadcrumb_front_name = $config->get('breadcrumb_front_name');
+    if (empty($breadcrumb_front_name)) {
+      $breadcrumb_front_name = t('Home');
+    }
     if ($variables['breadcrumb'][0]['url'] != '/') {
-      $config = \Drupal::config('myroute_breadcrumb.settings');
-      $breadcrumb_front_name = $config->get('breadcrumb_front_name');
-      if (empty($breadcrumb_front_name)) {
-        $breadcrumb_front_name = t('Home');
-      }
       $variables['breadcrumb'][-1] = [
         'text' => $breadcrumb_front_name,
         'url' => '/'
@@ -22,7 +22,7 @@ function myroute_breadcrumb_preprocess_breadcrumb(&$variables) {
       ksort($variables['breadcrumb']);
     }
     else {
-      $variables['breadcrumb'][0] = ['text' => t('Home'), 'url' => '/'];
+      $variables['breadcrumb'][0] = ['text' => $breadcrumb_front_name, 'url' => '/'];
     }
 
 

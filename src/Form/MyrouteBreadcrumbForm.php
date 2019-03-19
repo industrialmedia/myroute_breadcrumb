@@ -92,6 +92,7 @@ class MyrouteBreadcrumbForm extends EntityForm implements ContainerInjectionInte
       '#default_value' => $myroute_breadcrumb->getRouteName(),
       '#required' => TRUE,
       '#autocomplete_route_name' => 'myroute_breadcrumb.router_autocomplete',
+      '#description' => 'Если правило не зависит от роута, испльзуйте <strong>none</strong> (не рекомендуется, но иногда полезно для хлебных крошек по дефолту)',
     ];
     if (!$myroute_breadcrumb->isNew()) {
       $form['items_section'] = $this->createItemsSet($form, $form_state, $myroute_breadcrumb);

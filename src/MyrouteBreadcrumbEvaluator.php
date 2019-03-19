@@ -72,8 +72,12 @@ class MyrouteBreadcrumbEvaluator {
 
   public function evaluateByRouteName($route_name) {
     if (!isset($this->evaluations_by_route_name[$route_name])) {
-      $myroute_breadcrumbs = $this->entityTypeManager->getStorage('myroute_breadcrumb')
-        ->loadByProperties(['route_name' => $route_name]);
+
+      $query = \Drupal::entityQuery('myroute_breadcrumb')
+        ->condition('route_name', [$route_name, 'none'], 'IN');
+      $ids = $query->execute();
+      $myroute_breadcrumbs = $this->entityTypeManager->getStorage('myroute_breadcrumb')->loadMultiple($ids);
+      
       uasort($myroute_breadcrumbs, function (MyrouteBreadcrumb $a, MyrouteBreadcrumb $b) {
         $a = $a->getWeight();
         $b = $b->getWeight();

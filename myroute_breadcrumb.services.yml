@@ -9,7 +9,7 @@ services:
 
   myroute_breadcrumb.breadcrumb:
     class: Drupal\myroute_breadcrumb\Breadcrumb\MyrouteBreadcrumbBuilder
-    arguments: ['@token', '@entity_type.manager', '@myroute_breadcrumb.myroute_breadcrumb_evaluator', '@path.validator', '@myroute_breadcrumb.helper']
+    arguments: ['@token', '@entity_type.manager', '@myroute_breadcrumb.myroute_breadcrumb_evaluator', '@path.validator', '@myroute_breadcrumb.helper', '@config.factory']
     tags:
     - { name: breadcrumb_builder, priority: 10000 }
 
