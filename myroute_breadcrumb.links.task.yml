@@ -1,5 +1,4 @@
 
-
 entity.myroute_breadcrumb.collection:
   route_name: entity.myroute_breadcrumb.collection
   base_route: entity.myroute_breadcrumb.collection

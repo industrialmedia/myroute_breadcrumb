@@ -70,6 +70,17 @@ class MyrouteBreadcrumbForm extends EntityForm implements ContainerInjectionInte
     $form = parent::form($form, $form_state);
     /** @var \Drupal\myroute_breadcrumb\Entity\MyrouteBreadcrumb $myroute_breadcrumb */
     $myroute_breadcrumb = $this->entity;
+    $form['help'] = [
+      '#markup' => '
+        <ul>
+          <li><strong>Укажите типы страниц для каких сработает шаблон:</strong><br />
+          <em>роут</em> - один из зарегистрированных на сайте (нода, термин, товар, ...)<br /> 
+          <em>условия</em> - для фильтрации страниц, любые доступные на сайте (словарь таксономии, тип ноды, текущая тема, ...). Если в списке нет - его нужно написать наследуя класс ConditionPluginBase</li>
+          <li><strong>Заполните шаблоны для хлебных крошек:</strong><br />
+          можно испльзовать любые допустимые токены, если нужного токена нет - его нужно написать hook_tokens</li>
+        </ul>',
+      '#weight' => -10,
+    ];
     $form['label'] = array(
       '#type' => 'textfield',
       '#title' => $this->t('Label'),
@@ -155,6 +166,9 @@ class MyrouteBreadcrumbForm extends EntityForm implements ContainerInjectionInte
       ];
       $form['items_section']['items'][] = $row;
     }
+    $form['items_section']['help'] = [
+      '#markup' => '<div class="help">Для поля ссылка укажите <strong>&lt;none&gt;</strong>, если она должна быть текстом</div>',
+    ];
     $form['items_section']['actions'] = [
       '#type' => 'actions',
     ];

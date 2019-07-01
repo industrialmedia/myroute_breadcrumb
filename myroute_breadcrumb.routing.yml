@@ -3,7 +3,7 @@ entity.myroute_breadcrumb.collection:
   path: '/admin/seo/myroute_breadcrumb/list'
   defaults:
     _entity_list: 'myroute_breadcrumb'
-    _title: 'MyrouteBreadcrumb'
+    _title: 'Хлебные крошки'
   requirements:
     _permission: 'administer site configuration'
 
@@ -11,7 +11,7 @@ entity.myroute_breadcrumb.add_form:
   path: '/admin/seo/myroute_breadcrumb/list/add'
   defaults:
     _entity_form: 'myroute_breadcrumb.add'
-    _title: 'Add MyrouteBreadcrumb'
+    _title: 'Добавить шаблон хлебных крошек'
   requirements:
     _permission: 'administer site configuration'
 
@@ -19,7 +19,7 @@ entity.myroute_breadcrumb.edit_form:
   path: '/admin/seo/myroute_breadcrumb/list/{myroute_breadcrumb}'
   defaults:
     _entity_form: 'myroute_breadcrumb.edit'
-    _title: 'Edit MyrouteBreadcrumb'
+    _title: 'Редактировать шаблон хлебных крошек'
   requirements:
     _permission: 'administer site configuration'
 
@@ -27,7 +27,7 @@ entity.myroute_breadcrumb.delete_form:
   path: '/admin/seo/myroute_breadcrumb/list/{myroute_breadcrumb}/delete'
   defaults:
     _entity_form: 'myroute_breadcrumb.delete'
-    _title: 'Delete MyrouteBreadcrumb'
+    _title: 'Удалить шаблон хлебных крошек'
   requirements:
     _permission: 'administer site configuration'
     
@@ -83,7 +83,7 @@ myroute_breadcrumb.condition_delete:
 myroute_breadcrumb.admin.settings:
   path: '/admin/seo/myroute_breadcrumb/settings'
   defaults:
-    _title: 'Настройки'
+    _title: 'Настройки хлебных крошек'
     _form: 'Drupal\myroute_breadcrumb\Form\MyrouteBreadcrumbSettingsForm'
   requirements:
     _permission: 'administer site configuration'

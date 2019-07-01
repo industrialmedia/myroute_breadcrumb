@@ -1,6 +1,6 @@
 entity.myroute_breadcrumb.add_form:
   route_name: 'entity.myroute_breadcrumb.add_form'
-  title: 'Add MyrouteBreadcrumb'
+  title: 'Добавить шаблон'
   appears_on:
     - entity.myroute_breadcrumb.collection
 
