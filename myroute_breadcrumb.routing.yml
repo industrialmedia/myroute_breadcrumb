@@ -30,7 +30,7 @@ entity.myroute_breadcrumb.delete_form:
     _title: 'Удалить шаблон хлебных крошек'
   requirements:
     _permission: 'administer site configuration'
-    
+
 
 
 # Autocomplete

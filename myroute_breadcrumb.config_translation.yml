@@ -1,0 +1,5 @@
+myroute_breadcrumb.settings:
+  title: 'Настройки хлебных крошек'
+  base_route_name: myroute_breadcrumb.admin.settings
+  names:
+    - myroute_breadcrumb.settings

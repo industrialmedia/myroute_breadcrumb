@@ -247,6 +247,7 @@ class MyrouteBreadcrumbForm extends EntityForm implements ContainerInjectionInte
         '#empty' => $this->t('There are no conditions.'),
       ];
       foreach ($conditions as $condition_id => $condition) {
+        /* @var \Drupal\Core\Condition\ConditionPluginBase $condition */
         $row = [];
         $row['label']['#markup'] = $condition->getPluginDefinition()['label'];
         $row['description']['#markup'] = $condition->summary();

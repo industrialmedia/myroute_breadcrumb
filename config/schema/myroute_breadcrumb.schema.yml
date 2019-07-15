@@ -1,0 +1,58 @@
+myroute_breadcrumb.myroute_breadcrumb.*:
+  type: config_entity
+  label: 'My route breadcrumb entity'
+  mapping:
+    id:
+      type: string
+      label: 'ID'
+    label:
+      type: label
+      label: 'Label'
+    route_name:
+      type: string
+      label: 'Route name'
+    weight:
+      type: integer
+      label: 'Weight'
+    items:
+      type: sequence
+      label: 'Items'
+      sequence:
+        type: mapping
+        label: 'Item'
+        mapping:
+          name:
+            type: label
+            label: 'Name'
+          link:
+            type: label
+            label: 'Link'
+    conditions:
+      type: sequence
+      label: 'Conditions'
+      sequence:
+        type: condition.plugin.[id]
+        label: 'Condition'
+    logic:
+      type: string
+      label: 'Conditions logic'
+
+
+
+myroute_breadcrumb.settings:
+  type: config_object
+  label: 'My route breadcrumb settings'
+  mapping:
+    breadcrumb_front_name:
+      type: label
+      label: 'Название хлебной крошки на главную'
+    is_remove_current_url:
+      type: boolean
+      label: 'Название хлебной крошки на главную'
+    is_add_current_title:
+      type: boolean
+      label: 'Удалять ссылку, если это сылка на текущую страницу'
+    is_add_current_title_to_one:
+      type: boolean
+      label: 'Добавлять послейднюю крошку текущий заголовок, если кол-во крошек меньше двух'
+

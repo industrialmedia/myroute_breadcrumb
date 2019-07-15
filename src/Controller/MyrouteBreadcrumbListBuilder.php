@@ -5,6 +5,8 @@ namespace Drupal\myroute_breadcrumb\Controller;
 
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Config\Entity\DraggableListBuilder;
+use Drupal\Core\Link;
+
 
 /**
  * Provides a listing of MyrouteBreadcrumb entities.
@@ -43,8 +45,11 @@ class MyrouteBreadcrumbListBuilder extends DraggableListBuilder {
    */
   public function render() {
     $build = parent::render();
+    $link = Link::createFromRoute('ссылкой', 'myroute_breadcrumb.admin.settings');
     $build['help'] = [
-      '#markup' => '<p>Первый шаблон из списка для которого все условия будут выполнены - будет использован.</p>',
+      '#markup' => '<p>
+        Первый шаблон из списка для которого все условия будут выполнены - будет использован. <br />
+        Для изменения настроек хлебных крошек воспользуйтесь ' . $link->toString() . '.</p>',
       '#weight' => -10,
     ];
     return $build;
