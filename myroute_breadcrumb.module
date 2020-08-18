@@ -1,27 +1,28 @@
 <?php
 
+use Drupal\Core\Url;
 
 function myroute_breadcrumb_preprocess_breadcrumb(&$variables) {
   $_route_object = \Symfony\Cmf\Component\Routing\RouteObjectInterface::ROUTE_OBJECT;
   if (!empty($variables['breadcrumb'])) {
-
     $request = \Drupal::request();
 
     // Крошка на главную страницу
     $config = \Drupal::config('myroute_breadcrumb.settings');
-    $breadcrumb_front_name = $config->get('breadcrumb_front_name');
-    if (empty($breadcrumb_front_name)) {
-      $breadcrumb_front_name = t('Home');
+    $front_text = $config->get('breadcrumb_front_name');
+    if (empty($front_text)) {
+      $front_text = t('Home');
     }
-    if ($variables['breadcrumb'][0]['url'] != '/') {
+    $front_url = Url::fromRoute('<front>')->toString();
+    if ($variables['breadcrumb'][0]['url'] != $front_url) {
       $variables['breadcrumb'][-1] = [
-        'text' => $breadcrumb_front_name,
-        'url' => '/'
+        'text' => $front_text,
+        'url' => $front_url,
       ];
       ksort($variables['breadcrumb']);
     }
     else {
-      $variables['breadcrumb'][0] = ['text' => $breadcrumb_front_name, 'url' => '/'];
+      $variables['breadcrumb'][0] = ['text' => $front_text, 'url' => $front_url];
     }
 
     // Удаляем ссылку если это сылка на текущую страницу
